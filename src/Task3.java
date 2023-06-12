@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Task3 {
     public static void main(String[] args) {
@@ -13,24 +13,17 @@ public class Task3 {
     private static String getSortedNumbers(String[] array) {
         List<Integer> numbers = new ArrayList<>();
 
-        for (String str : array) {
-            String[] parts = str.split(",\\s*");
-            for (String part : parts) {
-                int number = Integer.parseInt(part.trim());
-                numbers.add(number);
-            }
-        }
+        Arrays.stream(array)
+                .map(str -> str.split(",\\s*"))
+                .flatMap(Arrays::stream)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .forEach(numbers::add);
 
-        Collections.sort(numbers);
+        numbers.sort(null);
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < numbers.size(); i++) {
-            sb.append(numbers.get(i));
-            if (i < numbers.size() - 1) {
-                sb.append(", ");
-            }
-        }
-
-        return sb.toString();
+        return numbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 }
