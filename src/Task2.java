@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Task2 {
     public static void main(String[] args) {
@@ -10,15 +9,10 @@ public class Task2 {
     }
 
     private static List<String> processStrings(List<String> strings) {
-        List<String> processedStrings = new ArrayList<>();
-
-        for (String str : strings) {
-            String processedStr = str.toUpperCase();
-            processedStrings.add(processedStr);
-        }
-
-        Collections.sort(processedStrings, Collections.reverseOrder());
-
-        return processedStrings;
+        return strings.stream()
+                .map(String::toUpperCase)
+                .sorted(Collections.reverseOrder())
+                .collect(Collectors.toList());
     }
 }
+
