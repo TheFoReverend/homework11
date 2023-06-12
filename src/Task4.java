@@ -13,6 +13,7 @@ public class Task4 {
     private static Stream<Long> generateRandomStream(long a, long c, long m) {
         long seed = System.currentTimeMillis();
 
-        return Stream.iterate(seed, x -> (a * x + c) % m);
+        return Stream.iterate(seed, x -> (a * x + c) % m)
+                .map(x -> x ^ (x >>> 16)); 
     }
 }
