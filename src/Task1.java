@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Task1 {
     public static void main(String[] args) {
@@ -8,15 +10,9 @@ public class Task1 {
     }
 
     private static String getNamesString(List<String> names) {
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 1; i < names.size(); i += 2) {
-            sb.append(i).append(". ").append(names.get(i));
-            if (i < names.size() - 2) {
-                sb.append(", ");
-            }
-        }
-
-        return sb.toString();
+        return IntStream.range(1, names.size())
+                .filter(i -> i % 2 == 1)
+                .mapToObj(i -> i + ". " + names.get(i))
+                .collect(Collectors.joining(", "));
     }
 }
