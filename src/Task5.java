@@ -25,7 +25,9 @@ public class Task5 {
 
             @Override
             public T next() {
-                return firstIterator.next();
+                T firstElement = firstIterator.next();
+                T secondElement = secondIterator.next();
+                return firstElement;
             }
         };
 
